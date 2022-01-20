@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "984408373782",
+    "firebase_url": "https://hellogram-d25d3-default-rtdb.firebaseio.com",
+    "project_id": "hellogram-d25d3",
+    "storage_bucket": "hellogram-d25d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984408373782:android:fb4b0afdbf2ad9b8585337",
+        "android_client_info": {
+          "package_name": "com.example.hellogram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "984408373782-2gkv95vrk3rdmikquaad98j8arvc0a9o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ17varkj3TgDdZyCyT8xuRprKQL1nwM4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "984408373782-2gkv95vrk3rdmikquaad98j8arvc0a9o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Hellogram</string>
+    <string name="icon">icon</string>
+    <string name="Signup" />
+    <string name="logo" />
+    <string name="login">Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="username">Username</string>
+    <string name="name">Name</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="already_have_an_account_login">Already have an account? Login</string>
+    <string name="new_to_hellogram_sign_up">New to Hellogram? Sign up</string>
+    <string name="password">Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_fragment">Hello Fragment</string>
+    <string name="notification_fragment">Notification Fragment</string>
+    <string name="home_fragment">Home fragment</string>
+    <string name="Profile_Fragment">Profile Fragment</string>
+    <string name="search_fragment">Search Fragment</string>
+    <string name="post">POST</string>
+    <string name="description">Description...</string>
+    <string name="photo">photo</string>
+    <string name="search">Search...</string>
+    <string name="full_name">Full Name</string>
+    <string name="tag">#tag</string>
+    <string name="_123_posts">123 posts</string>
+    <string name="follow">follow</string>
+    <string name="post_image">post_image</string>
+    <string name="_123_likes">123 likes</string>
+    <string name="yousof_asadi">Yousof Asadi</string>
+    <string name="yousof_des">Yousof des</string>
+    <string name="add_a_comment">Add a comment ...</string>
+    <string name="followers">FOLLOWERS</string>
+    <string name="followings">FOLLOWINGS</string>
+    <string name="posts">POSTS</string>
+    <string name="menu">menu</string>
+    <string name="following">FOLLOWING</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="notifications">Notifications</string>
+    <string name="profile">profile</string>
+</resources>
