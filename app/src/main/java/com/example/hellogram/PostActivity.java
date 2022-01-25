@@ -80,43 +80,53 @@ public class PostActivity extends AppCompatActivity {
                 return filePath.getDownloadUrl();
 
             }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
-                Uri downloadUri = task.getResult();
-                imageUrl = downloadUri.toString();
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    imageUrl = downloadUri.toString();
 
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
-                String postId = ref.push().getKey();
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+                    String postId = ref.push().getKey();
 
-                HashMap<String, Object> map = new HashMap<>();
+                    HashMap<String, Object> map = new HashMap<>();
 
-                map.put("postid", postId);
-                map.put("imageurl", imageUrl);
-                map.put("description", description.getText().toString());
-                map.put("publisher", Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+                    map.put("postid", postId);
+                    map.put("imageurl", imageUrl);
+                    map.put("description", description.getText().toString());
+                    map.put("publisher", Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
 
-                assert postId != null;
-                ref.child(postId).setValue(map);
+                    assert postId != null;
+                    ref.child(postId).setValue(map);
 
-                DatabaseReference mHashTagRef = FirebaseDatabase.getInstance().getReference().child("HashTags");
-                List<String> hashTags = description.getHashtags();
-                if (!hashTags.isEmpty()){
-                    for (String tag : hashTags){
-                        map.clear();
+                    DatabaseReference mHashTagRef = FirebaseDatabase.getInstance().getReference().child("HashTags");
+                    List<String> hashTags = description.getHashtags();
+                    if (!hashTags.isEmpty()){
+                        for (String tag : hashTags){
+                            map.clear();
 
-                        map.put("tag", tag.toLowerCase());
-                        map.put("postid", postId);
+                            map.put("tag", tag.toLowerCase());
+                            map.put("postid", postId);
 
-                        mHashTagRef.child(tag.toLowerCase()).child(postId).setValue(map);
+                            mHashTagRef.child(tag.toLowerCase()).child(postId).setValue(map);
+                        }
                     }
-                }
 
+
+                    startActivity(new Intent(PostActivity.this, MainActivity.class));
+                    finish();
+                    pd.dismiss();
+                }
+                else{
+                    Toast.makeText(PostActivity.this, "Upload Failed!", Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
+                }
+            }).addOnFailureListener(e ->
+                    Toast.makeText(PostActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show());
                 pd.dismiss();
-                startActivity(new Intent(PostActivity.this, MainActivity.class));
-                finish();
-            }).addOnFailureListener(e -> Toast.makeText(PostActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show());
         }
         else {
             Toast.makeText(this, "No image was selected!", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private String getFileExtension(Uri uri) {

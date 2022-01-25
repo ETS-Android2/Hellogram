@@ -89,19 +89,19 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
                                 android:id="@+id/posts"
-                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center"
+                                android:textColor="@color/colorPrimaryDark"
                                 android:textSize="18sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12sp"
-                                android:text="@string/posts"/>
+                                android:text="@string/posts"
+                                android:textSize="12sp" />
 
                         </LinearLayout>
 
@@ -112,19 +112,19 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
                                 android:id="@+id/followers"
-                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center"
+                                android:textColor="@color/colorPrimaryDark"
                                 android:textSize="18sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12sp"
-                                android:text="@string/followers"/>
+                                android:text="@string/followers"
+                                android:textSize="12sp" />
 
                         </LinearLayout>
 
@@ -135,19 +135,19 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/following"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/following"
-                                android:textColor="@color/colorPrimaryDark"
                                 android:layout_gravity="center"
+                                android:textColor="@color/colorPrimaryDark"
                                 android:textSize="18sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12sp"
-                                android:text="@string/following"/>
+                                android:text="@string/following"
+                                android:textSize="12sp" />
 
                         </LinearLayout>
 
@@ -155,14 +155,27 @@
                     </LinearLayout>
 
                     <Button
+                        android:id="@+id/edit_profile"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
-                        android:textSize="10sp"
                         android:layout_marginTop="10dp"
-                        android:id="@+id/edit_profile"
                         android:text="@string/edit_profile"
+                        android:textSize="10sp"
                         tools:ignore="SmallSp" />
 
+<!--                    <Button-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:text="Block"-->
+<!--                        android:textSize="10sp"-->
+<!--                        android:id="@+id/block"/>-->
+
+<!--                    <Button-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:text="Start Massage"-->
+<!--                        android:textSize="10sp"-->
+<!--                        android:id="@+id/start_massage"/>-->
 
                 </LinearLayout>
 

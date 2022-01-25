@@ -95,7 +95,7 @@ public class CommentActivity extends AppCompatActivity {
 
     private void getComment() {
 
-        FirebaseDatabase.getInstance().getReference().child("Comments").child(postId).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Posts").child(postId).child("Comments").addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -120,7 +120,7 @@ public class CommentActivity extends AppCompatActivity {
 
         HashMap<String, Object> map = new HashMap<>();
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Comments").child(postId);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Posts").child(postId).child("Comments");
         String id = ref.push().getKey();
 
         map.put("id", id);

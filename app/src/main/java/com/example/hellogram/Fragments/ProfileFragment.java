@@ -68,7 +68,6 @@ public class ProfileFragment extends Fragment {
 
     String profileId;
 
-
     @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -132,20 +131,19 @@ public class ProfileFragment extends Fragment {
             }
             else {
                 if (btnText.equals("follow")){
-                    FirebaseDatabase.getInstance().getReference().child("Follow").child(fUser.getUid())
-                            .child("following").child(profileId).setValue(true);
+                    FirebaseDatabase.getInstance().getReference().child("Users").child(fUser.getUid())
+                            .child("ProfileData").child("following").child(profileId).setValue(true);
 
-                    FirebaseDatabase.getInstance().getReference().child("Follow").child(profileId)
-                            .child("followers").child(fUser.getUid()).setValue(true);
-
+                    FirebaseDatabase.getInstance().getReference().child("Users").child(profileId)
+                            .child("ProfileData").child("followers").child(fUser.getUid()).setValue(true);
                 }
 
                 else {
-                    FirebaseDatabase.getInstance().getReference().child("Follow").child(fUser.getUid())
-                            .child("following").child(profileId).removeValue();
+                    FirebaseDatabase.getInstance().getReference().child("Users").child(fUser.getUid())
+                            .child("ProfileData").child("following").child(profileId).removeValue();
 
-                    FirebaseDatabase.getInstance().getReference().child("Follow").child(profileId)
-                            .child("followers").child(fUser.getUid()).removeValue();
+                    FirebaseDatabase.getInstance().getReference().child("Users").child(profileId)
+                            .child("ProfileData").child("followers").child(fUser.getUid()).removeValue();
                 }
             }
         });
@@ -186,7 +184,7 @@ public class ProfileFragment extends Fragment {
 
         List<String> savedIds = new ArrayList<>();
 
-        FirebaseDatabase.getInstance().getReference().child("Saves").child(fUser.getUid()).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Users").child(fUser.getUid()).child("Saves").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot eachSnapShot: snapshot.getChildren()){
@@ -255,7 +253,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void checkFollowingStatus() {
-        FirebaseDatabase.getInstance().getReference().child("Follow").child(fUser.getUid()).child("following").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Users").child(fUser.getUid()).child("ProfileData").child("following").addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -298,7 +296,7 @@ public class ProfileFragment extends Fragment {
 
     private void getFollowersAndFollowingCount() {
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Follow").child(profileId);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(profileId).child("ProfileData");
 
         ref.child("followers");
         ref.addValueEventListener(new ValueEventListener() {
@@ -341,9 +339,7 @@ public class ProfileFragment extends Fragment {
                 username.setText(user.getUsername());
                 fullname.setText(user.getName());
                 bio.setText(user.getBio());
-
             }
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

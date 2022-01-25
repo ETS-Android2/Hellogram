@@ -16,6 +16,7 @@ import com.example.hellogram.Adapter.NotificationAdapter;
 import com.example.hellogram.Model.Notification;
 import com.example.hellogram.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,6 +32,7 @@ public class NotificationFragment extends Fragment {
     private NotificationAdapter notificationAdapter;
     private List<Notification> notificationList;
 
+    private FirebaseUser firebaseUser;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +45,7 @@ public class NotificationFragment extends Fragment {
         notificationList = new ArrayList<>();
         notificationAdapter = new NotificationAdapter(getContext(), notificationList);
         recyclerView.setAdapter(notificationAdapter);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         readNotification();
 
@@ -51,8 +54,7 @@ public class NotificationFragment extends Fragment {
 
     private void readNotification() {
 
-        FirebaseDatabase.getInstance().getReference().child("Notifications")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Notifications").addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

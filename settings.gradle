@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Hellogram"
 include ':app'
+include ':app:libs'

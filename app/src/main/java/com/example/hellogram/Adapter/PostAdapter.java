@@ -91,15 +91,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
         holder.like.setOnClickListener(v -> {
             if (holder.like.getTag().equals("like")) {
-                FirebaseDatabase.getInstance().getReference().child("Likes")
-                        .child(post.getPostid()).child(firebaseUser.getUid()).setValue(true);
+                FirebaseDatabase.getInstance().getReference().child("Posts")
+                        .child(post.getPostid()).child("Likes").child(firebaseUser.getUid()).setValue(true);
 
                 addNotification(post.getPostid(), post.getPublisher());
 
             }
             else{
-                FirebaseDatabase.getInstance().getReference().child("Likes")
-                        .child(post.getPostid()).child(firebaseUser.getUid()).removeValue();
+                FirebaseDatabase.getInstance().getReference().child("Posts")
+                        .child(post.getPostid()).child("Likes").child(firebaseUser.getUid()).removeValue();
             }
         });
 
@@ -119,12 +119,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
         holder.save.setOnClickListener(v -> {
             if (holder.save.getTag().equals("save")){
-                FirebaseDatabase.getInstance().getReference().child("Saves")
-                        .child(firebaseUser.getUid()).child(post.getPostid()).setValue(true);
+                FirebaseDatabase.getInstance().getReference().child("Users")
+                        .child(firebaseUser.getUid()).child("Saves").child(post.getPostid()).setValue(true);
 
             }else{
-                FirebaseDatabase.getInstance().getReference().child("Saves")
-                        .child(firebaseUser.getUid()).child(post.getPostid()).removeValue();
+                FirebaseDatabase.getInstance().getReference().child("Users")
+                        .child(firebaseUser.getUid()).child("Saves").child(post.getPostid()).removeValue();
             }
         });
 
@@ -210,7 +210,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     }
 
     private void isLiked(String postId, ImageView imageView){
-        FirebaseDatabase.getInstance().getReference().child("Likes").child(postId).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Posts").child(postId).child("Likes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(firebaseUser.getUid()).exists()){
@@ -231,7 +231,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     }
 
     private void noOfLikes(String postId, TextView text){
-        FirebaseDatabase.getInstance().getReference().child("Likes").child(postId).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Posts").child(postId).child("Likes").addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -267,11 +267,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         map.put("postid", postid);
         map.put("isPost", true);
 
-        FirebaseDatabase.getInstance().getReference().child("Notifications").child(firebaseUser.getUid()).push().setValue(map);
+        FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Notifications").push().setValue(map);
     }
 
     private void isSaved(String postid, ImageView image) {
-        FirebaseDatabase.getInstance().getReference().child("Saves").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Saves").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(postid).exists()){

@@ -69,7 +69,7 @@ public class FollowersActivity extends AppCompatActivity {
     }
 
     private void getFollowers() {
-        FirebaseDatabase.getInstance().getReference().child("Follow").child(id).child("followers").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Users").child(id).child("ProfileData").child("followers").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 idList.clear();
@@ -88,7 +88,7 @@ public class FollowersActivity extends AppCompatActivity {
     }
 
     private void getFollowings() {
-        FirebaseDatabase.getInstance().getReference().child("Follow").child(id).child("following").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Users").child(id).child("ProfileData").child("following").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 idList.clear();
@@ -107,7 +107,7 @@ public class FollowersActivity extends AppCompatActivity {
     }
 
     private void getLikes() {
-        FirebaseDatabase.getInstance().getReference().child("Likes").child(id).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Posts").child(id).child("Likes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 idList.clear();

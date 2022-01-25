@@ -1,6 +1,5 @@
 package com.example.hellogram;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,11 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Objects;
+
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -66,9 +68,7 @@ public class SignupActivity extends AppCompatActivity {
             else{
                 signupUser(textUsername, textName, textEmail, textPassword);
             }
-
         });
-
     }
 
     private void signupUser(String username, String name, String email, String password) {
@@ -76,30 +76,36 @@ public class SignupActivity extends AppCompatActivity {
         pd.setMessage("Please Wait!");
         pd.show();
 
-        mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
 
             HashMap<String, Object> map = new HashMap<>();
             map.put("name", name);
             map.put("email", email);
             map.put("username", username);
-            map.put("id", Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
+            map.put("id", mAuth.getCurrentUser().getUid());
             map.put("bio", "");
             map.put("imageurl", "default");
+            map.put("date", "");
 
-            mRootRef.child("Users").child(mAuth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(task -> {
-                if (task.isSuccessful()){
-                    pd.dismiss();
-                    Toast.makeText(SignupActivity.this, "Update the profile for " +
-                            "better experience!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    finish();
+            mRootRef.child("Users").child(mAuth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(task2 -> {
+                if (task2.isSuccessful()){
+                    mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()){
+                            pd.dismiss();
+                            Toast.makeText(SignupActivity.this, "Your account has been successfully created!\n" +
+                                    "Please check your email for verification!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("Groups");
+                            startActivity(intent);
+                            finish();
+                        }
+                        else{
+                            Toast.makeText(SignupActivity.this, Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             });
-        }).addOnFailureListener(e -> {
-            pd.dismiss();
-            Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         });
     }
 }

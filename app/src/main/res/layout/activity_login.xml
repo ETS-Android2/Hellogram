@@ -58,12 +58,31 @@
         android:layout_marginHorizontal="10dp"
         android:id="@+id/login"/>
 
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/google"
+            android:contentDescription="google"
+            android:id="@+id/login_with_google"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/new_to_hellogram_sign_up"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/signup_user"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/change_password"
+        android:text="@string/forgot_password"
+        android:textColor="#c24036"
+        android:textSize="12sp" />
+
+
 
 
 </LinearLayout>

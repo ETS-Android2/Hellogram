@@ -72,21 +72,21 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
         holder.btnFollow.setOnClickListener(v -> {
             if (holder.btnFollow.getText().toString().equals("follow")){
-                FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid()).child("following")
+                FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("ProfileData").child("following")
                         .child(user.getId()).setValue(true);
 
-                FirebaseDatabase.getInstance().getReference().child("Follow").
-                        child(user.getId()).child("followers").child(firebaseUser.getUid()).setValue(true);
+                FirebaseDatabase.getInstance().getReference().child("Users").
+                        child(user.getId()).child("ProfileData").child("followers").child(firebaseUser.getUid()).setValue(true);
 
                 addNotification(user.getId());
 
             }
             else {
-                FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid()).child("following")
+                FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("ProfileData").child("following")
                         .child(user.getId()).removeValue();
 
-                FirebaseDatabase.getInstance().getReference().child("Follow").
-                        child(user.getId()).child("followers").child(firebaseUser.getUid()).removeValue();
+                FirebaseDatabase.getInstance().getReference().child("Users").
+                        child(user.getId()).child("ProfileData").child("followers").child(firebaseUser.getUid()).removeValue();
             }
 
         });
@@ -113,13 +113,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         map.put("postid", "");
         map.put("isPost", false);
 
-        FirebaseDatabase.getInstance().getReference().child("Notifications").child(firebaseUser.getUid()).push().setValue(map);
+        FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Notifications").push().setValue(map);
     }
 
     private void isFollowed(String id, Button btnFollow) {
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
-                .child("following");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid())
+                .child("ProfileData").child("following");
         reference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
