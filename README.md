@@ -1,6 +1,10 @@
 # Hellogram
-salam va dorood be to 
-in file baraye kole project android studio hast albate moteasefane kamel nist.
-vali omidvaram morede pasandet bashe.
-age ham gooshi androidi dari to masir asli repository yani https://github.com/YousofAsadi/Hellogram ye file hast be esme Hellogram.apk ke mitooni roo gooshit nasbesh koni va estefade koni.
-in homework database dare vali chon az firebase estefade kardam filter hast va bayad baraye estefade az application az VPN estefade koni. :)
+This project was meant to be a project of advanced programming professor Ali Hamze shiraz university it is an integrated app with 2 versions first in android and second in java desktop app 
+the program was written in java and the desktop interface was done using the Joption pane library in java swing 
+in this project, we had to design and develop an Instagram application which you can see in the project docs in this link.
+https://docs.google.com/document/d/1CTGvszgJnpXxPfBzoC9FqgLjuEraYIa2K5vZY_pKmBs/edit
+
+You can see the UML class diagram for this app in the folder our application fully supports page privacy (private/public) and users can log in or sign up in the app also this process of signing in and signing up supports 2fa using email which the files are in the source library folder after we sign in to the program we see 4 main pages of the Instagram which are home and search and user and massage page and the massage page supports both private and group chats the groups chats have admins and members which admins can add or remove members from the group or promote them from member to admin. also, the group has a request page which everyone can search the groups id and confirm the request and wait for admins to accept or reject the request after that, they will be a member of the group on their home page you will see the posts that publish by users you followed and for following a user you must go to the search page in the search page we have the search button which you can search the name or the username of the user you'd like to see its profile.
+you may not see the search users post because they have set their privacy to private not public in this case you must first request to follow them and if they accept your follow request now you can also see their posts.
+each post has a post page which in the posting page you can see the post caption and the post possible image or video also each in the posting page you will able 2 sections that are like and comment sections in the comment section you can comment on the posts and the comment supports like and reply tasks which means other users can like your comment or reply to it.
+Also in the like section you like the post or dislike it and also you can the list of all likers just like Instagram.
